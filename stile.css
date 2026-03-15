@@ -1,0 +1,163 @@
+:root{
+  --paper: #f6f1e6;
+  --ink: #1f1d19;
+  --muted: rgba(31,29,25,0.62);
+  --muted-strong: rgba(31,29,25,0.72);
+  --line: rgba(31,29,25,0.12);
+  --shadow: 0 26px 70px rgba(12,10,7,0.18);
+  --shadow-soft: 0 12px 30px rgba(12,10,7,0.12);
+  --radius: 18px;
+  --glass: rgba(255,255,255,0.6);
+}
+
+* { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  color: var(--ink);
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background:
+    radial-gradient(900px 520px at 18% 10%, rgba(255,255,255,0.85) 0, transparent 60%),
+    radial-gradient(700px 520px at 85% 18%, rgba(255,255,255,0.72) 0, transparent 62%),
+    linear-gradient(180deg, #efe6d5 0%, #f3eddc 45%, #efe4cf 100%);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Container demo */
+.demo {
+  min-height: 100%;
+  display: grid;
+  place-items: center;
+  padding: clamp(18px, 4vw, 44px);
+}
+
+/* Stage wrapper with subtle pattern */
+.stage {
+  width: min(980px, 100%);
+  position: relative;
+}
+
+.stage::before{
+  content: "";
+  position: absolute;
+  inset: -26px;
+  border-radius: calc(var(--radius) + 20px);
+  background:
+    radial-gradient(18px at 16px 16px, rgba(31,29,25,0.08) 0, transparent 3px),
+    radial-gradient(18px at 46px 46px, rgba(31,29,25,0.06) 0, transparent 3px),
+    linear-gradient(135deg, rgba(31,29,25,0.06) 0%, transparent 50%);
+  background-size: 64px, auto;
+  filter: blur(.2px);
+  opacity: .9;
+  pointer-events: none;
+}
+
+/* "Scheda" panel */
+.scheda {
+  position: relative;
+  background: rgba(246,241,230,0.84);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  padding: clamp(18px, 3.2vw, 28px);
+  backdrop-filter: blur(10px);
+}
+
+/* Soft highlight on panel */
+.scheda::after{
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background:
+    radial-gradient(520px 260px at 12% 14%, rgba(255,255,255,0.85) 0, transparent 60%),
+    radial-gradient(520px 260px at 92% 0%, rgba(255,255,255,0.55) 0, transparent 55%);
+  pointer-events: none;
+  mix-blend-mode: soft-light;
+  opacity: .9;
+}
+
+/* Kicker / label */
+.kicker{
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.kicker::before{
+  content: "";
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  background: var(--muted-strong);
+  border-radius: 2px;
+}
+
+/* Headings and text inside scheda */
+.scheda h1, .scheda h2, .scheda h3 {
+  margin: 0 0 .6em 0;
+  color: var(--ink);
+}
+
+.scheda h1 {
+  font-family: "Fraunces", Inter, serif;
+  font-size: clamp(20px, 3vw, 32px);
+  line-height: 1.05;
+  font-weight: 700;
+}
+
+.scheda p {
+  margin: 0 0 1em 0;
+  color: var(--ink);
+  opacity: .95;
+  line-height: 1.5;
+}
+
+/* List styles */
+.scheda ul, .scheda ol {
+  margin: 0 0 1em 1.2em;
+  padding: 0;
+}
+
+/* Quick action buttons (copy, approfondimento, ecc.) */
+.button, .copyBtn, .focusBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,0.65), rgba(255,255,255,0.35));
+  box-shadow: var(--shadow-soft);
+  color: var(--ink);
+  cursor: pointer;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* Utility */
+.small {
+  font-size: 13px;
+  color: rgba(31,29,25,0.7);
+}
+
+/* Responsive tweaks */
+@media (max-width: 520px){
+  .scheda {
+    padding: 16px;
+    border-radius: 14px;
+  }
+  .kicker { font-size: 11px; gap: 8px; }
+  .button, .copyBtn, .focusBtn { padding: 8px 10px; }
+}
